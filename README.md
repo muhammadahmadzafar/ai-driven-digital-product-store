@@ -13,7 +13,7 @@ Enhanced with **AI-powered product recommendations** and designed for **real pay
 - 🔒 Secure downloads after purchase  
 - 📑 Orders & order history  
 - 🤖 AI-driven product recommendations (content-based filtering / collaborative filtering)  
-- 💳 Dummy payment integration (Stripe/PayPal support can be added)  
+- 💳 Stripe test payment integration  
 - 🎨 Responsive Bootstrap UI  
 
 ---
@@ -23,7 +23,7 @@ Enhanced with **AI-powered product recommendations** and designed for **real pay
 - **Database:** SQLite (default), MySQL optional  
 - **Frontend:** HTML, CSS, Bootstrap  
 - **AI/ML:** Recommendation Engine (scikit-learn, Pandas, NumPy)  
-- **Payments:** Dummy checkout (Stripe/PayPal-ready)  
+- **Payments:** Stripe (test mode)  
 
 ---
 
@@ -54,6 +54,3 @@ python manage.py loaddata initial_data.json
 
 # 6) Run server
 python manage.py runserver
-
-
-Open: http://127.0.0.1:8000
