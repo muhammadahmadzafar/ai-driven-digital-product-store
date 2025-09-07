@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}About Us{% endblock %}
+{% block content %}
+
+<!-- Hero Section -->
+<section class="about-hero text-center d-flex flex-column justify-content-center align-items-center text-white"
+         style="min-height: 60vh; background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+         url('https://via.placeholder.com/1600x600') no-repeat center center/cover;">
+    <h1 class="fw-bold display-4">About <span class="text-warning">Digital Store</span></h1>
+    <p class="lead mt-3">Your one-stop destination for premium digital products</p>
+</section>
+
+<!-- About Content -->
+<div class="container my-5">
+  <div class="row align-items-center">
+    
+    <!-- Image -->
+{% load static %}
+
+<div class="col-lg-6 mb-4">
+  <img src="{% static 'store/images/Digital-Products-Examples.png' %}" 
+       alt="Digital Product" 
+       class="img-fluid rounded-4 shadow">
+</div>
+
+
+
+
+    <!-- Text -->
+    <div class="col-lg-6">
+      <h2 class="fw-bold text-primary mb-3">Who We Are</h2>
+      <p class="text-muted">
+        Welcome to <strong>Digital Store</strong>, where innovation meets convenience. 
+        We provide a wide variety of digital products including e-books, software, 
+        templates, and creative resources that empower individuals and businesses.
+      </p>
+      <p class="text-muted">
+        Our mission is to deliver <strong>quality digital content</strong> with a seamless 
+        user experience. We ensure every product is secure, reliable, and easy to access.
+      </p>
+
+      <ul class="list-unstyled mt-3">
+        <li>✅ Premium Quality Products</li>
+        <li>✅ Instant Download</li>
+        <li>✅ 24/7 Customer Support</li>
+        <li>✅ Secure Payments</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- Our Vision Section -->
+<section class="py-5 text-center bg-light">
+  <div class="container">
+    <h2 class="fw-bold text-dark mb-4">Our Vision</h2>
+    <p class="lead text-muted">
+      We aim to be the leading platform for digital resources worldwide, 
+      helping creators and users achieve more with the power of technology.
+    </p>
+  </div>
+</section>
+
+{% endblock %}

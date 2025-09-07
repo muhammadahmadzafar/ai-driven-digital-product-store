@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load cart_extras %}
+{% block title %}Cart{% endblock %}
+{% block content %}
+<h3>Your Cart</h3>
+{% if items %}
+<table class="table">
+  <thead><tr><th>Product</th><th>Qty</th><th>Price</th><th>Total</th><th></th></tr></thead>
+  <tbody>
+    {% for it in items %}
+      <tr>
+        <td>{{ it.product.title }}</td>
+        <td>{{ it.qty }}</td>
+        <td>{{ it.product.price|currency }}</td>
+        <td>{{ it.line_total|currency }}</td>
+        <td><a href="{% url 'store:cart_remove' it.product.id %}" class="btn btn-sm btn-outline-danger">Remove</a></td>
+      </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr><th colspan="3" class="text-end">Subtotal:</th><th>{{ subtotal|currency }}</th><th></th></tr>
+  </tfoot>
+</table>
+<div class="d-flex gap-2">
+  <a class="btn btn-secondary" href="{% url 'store:cart_clear' %}">Clear Cart</a>
+  <a class="btn btn-primary" href="{% url 'store:checkout' %}">Proceed to Checkout</a>
+</div>
+{% else %}
+<p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

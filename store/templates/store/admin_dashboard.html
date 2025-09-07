@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card p-3 text-center border-primary">
+      <h4>Products</h4>
+      <h2>{{ products_count }}</h2>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card p-3 text-center border-success">
+      <h4>Orders</h4>
+      <h2>{{ orders_count }}</h2>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card p-3 text-center border-warning">
+      <h4>Users</h4>
+      <h2>{{ users_count }}</h2>
+    </div>
+  </div>
+</div>
+
+<hr>
+
+<h3>Latest Orders</h3>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>User</th>
+      <th>Product</th>
+      <th>Status</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in latest_orders %}
+      <tr>
+        <td>{{ order.id }}</td>
+        <td>{{ order.user.username }}</td>
+        <td>
+          {% for item in order.items.all %}
+            {{ item.product.name }} (x{{ item.quantity }})<br>
+          {% endfor %}
+        </td>
+        <td>
+  {% if order.paid %}
+    Paid
+  {% else %}
+    Pending
+  {% endif %}
+</td>
+
+        <td>{{ order.created_at|date:"d M Y" }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<hr>
+
+<h3>Orders by Status</h3>
+<canvas id="ordersChart" width="400" height="200"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const ctx = document.getElementById('ordersChart');
+    const ordersChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: [{% for row in orders_by_status %}'{% if row.paid %}Paid{% else %}Pending{% endif %}',{% endfor %}],
+datasets: [{
+    data: [{% for row in orders_by_status %}{{ row.total }},{% endfor %}],
+    borderWidth: 1
+}]
+
+        }
+    });
+    
+</script>
+
+{% endblock %}

@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block title %}Register{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 90vh; background: #f8f9fa;">
+  <div class="card shadow-lg p-5 rounded-4 border-0" style="width: 500px; background: #ffffff;">
+    
+    <!-- Page Title -->
+    <h3 class="text-center mb-4 text-primary fw-bold">✨ Create Your Account</h3>
+    
+    <form method="post" novalidate>
+      {% csrf_token %}
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="{{ form.username.id_for_label }}" class="form-label fw-semibold">Username</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          {{ form.username }}
+        </div>
+        {% if form.username.errors %}
+          <div class="text-danger small mt-1">{{ form.username.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="{{ form.email.id_for_label }}" class="form-label fw-semibold">Email Address</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+          {{ form.email }}
+        </div>
+        {% if form.email.errors %}
+          <div class="text-danger small mt-1">{{ form.email.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="{{ form.password1.id_for_label }}" class="form-label fw-semibold">Password</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          {{ form.password1 }}
+        </div>
+        {% if form.password1.errors %}
+          <div class="text-danger small mt-1">{{ form.password1.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="mb-3">
+        <label for="{{ form.password2.id_for_label }}" class="form-label fw-semibold">Confirm Password</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-shield-lock"></i></span>
+          {{ form.password2 }}
+        </div>
+        {% if form.password2.errors %}
+          <div class="text-danger small mt-1">{{ form.password2.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <!-- Submit Button -->
+      <button class="btn btn-primary w-100 rounded-pill fw-bold">Register</button>
+    </form>
+
+    <hr>
+
+    <!-- Login Link -->
+    <p class="text-center mt-3">
+      Already have an account? 
+      <a href="{% url 'login' %}" class="text-decoration-none text-primary fw-semibold">Login here</a>
+    </p>
+
+  </div>
+</div>
+
+{% endblock %}
+{% block footer %}{% endblock footer %}
+{% block chatbot %}{% endblock chatbot %}

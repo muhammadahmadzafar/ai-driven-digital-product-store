@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+
+<div class="d-flex justify-content-center align-items-center" style="min-height: 85vh; background: #f8f9fa;">
+  <div class="card shadow-lg p-5 rounded-4 border-0" style="width: 450px; background: #ffffff;">
+    
+    <!-- Page Title -->
+    <h3 class="text-center mb-4 text-primary fw-bold">🔑 Login to Your Account</h3>
+    
+    <form method="post" novalidate>
+      {% csrf_token %}
+       <input type="hidden" name="next" value="{{ next }}">
+
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="{{ form.username.id_for_label }}" class="form-label fw-semibold">Username</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-person"></i></span>
+          {{ form.username }}
+        </div>
+        {% if form.username.errors %}
+          <div class="text-danger small mt-1">{{ form.username.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label for="{{ form.password.id_for_label }}" class="form-label fw-semibold">Password</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="bi bi-lock"></i></span>
+          {{ form.password }}
+        </div>
+        {% if form.password.errors %}
+          <div class="text-danger small mt-1">{{ form.password.errors.0 }}</div>
+        {% endif %}
+      </div>
+
+      <!-- Submit Button -->
+      <button class="btn btn-primary w-100 rounded-pill fw-bold">Login</button>
+    </form>
+
+    <!-- General Non-field Errors (like wrong username/password) -->
+    {% if form.non_field_errors %}
+      <div class="alert alert-danger mt-3 mb-0 rounded-3">
+        {{ form.non_field_errors.0 }}
+      </div>
+    {% endif %}
+
+    <hr>
+
+    <!-- Register Link -->
+    <p class="text-center mt-3">
+      Don’t have an account? 
+      <a href="{% url 'store:register' %}" class="text-decoration-none text-primary fw-semibold">Register here</a>
+    </p>
+
+  </div>
+</div>
+
+{% endblock %}
+{% block footer %}{% endblock footer %}
+{% block chatbot %}{% endblock chatbot %}
+

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<h3>Checkout</h3>
+<table class="table">
+  <thead>
+    <tr><th>Product</th><th>Qty</th><th>Price</th><th>Total</th></tr>
+  </thead>
+  <tbody>
+    {% for item in items %}
+    <tr>
+      <td>{{ item.product.title }}</td>
+      <td>{{ item.qty }}</td>
+      <td>${{ item.product.price }}</td>
+      <td>${{ item.line_total }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+  <tfoot>
+    <tr><th colspan="3" class="text-end">Grand Total:</th><th>${{ total }}</th></tr>
+  </tfoot>
+</table>
+
+<h4>Payment</h4>
+<div id="card-element"></div>
+<button id="pay-button" class="btn btn-success mt-3">Pay ${{ total }}</button>
+<div id="payment-message" class="mt-2 text-danger"></div>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+const stripe = Stripe('{{ stripe_public_key }}');
+const elements = stripe.elements();
+const card = elements.create('card');
+card.mount('#card-element');
+
+const payButton = document.getElementById('pay-button');
+const paymentMessage = document.getElementById('payment-message');
+
+payButton.addEventListener('click', async () => {
+    payButton.disabled = true;
+    paymentMessage.textContent = "Processing payment...";
+
+    // Get client_secret from backend
+    const res = await fetch("{% url 'store:checkout' %}", {
+        method: "POST",
+        headers: {"X-CSRFToken": "{{ csrf_token }}"},
+    });
+    const data = await res.json();
+    const clientSecret = data.client_secret;
+    const orderId = data.order_id;
+
+    // Confirm payment
+    const {error, paymentIntent} = await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {card: card}
+    });
+
+    if (error) {
+        paymentMessage.textContent = error.message;
+        payButton.disabled = false;
+    } else if (paymentIntent.status === 'succeeded') {
+        // Redirect to success page
+        window.location.href = `/store/payment-success/${orderId}/`;
+    } else {
+    }
+});
+</script>
+{% endblock %}

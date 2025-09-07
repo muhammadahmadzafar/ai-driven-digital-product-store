@@ -1,0 +1,112 @@
+[
+  {
+    "model": "store.category",
+    "pk": 1,
+    "fields": {
+      "name": "E-books",
+      "slug": "e-books"
+    }
+  },
+  {
+    "model": "store.category",
+    "pk": 2,
+    "fields": {
+      "name": "Courses",
+      "slug": "courses"
+    }
+  },
+  {
+    "model": "store.category",
+    "pk": 3,
+    "fields": {
+      "name": "Templates",
+      "slug": "templates"
+    }
+  },
+  {
+    "model": "store.category",
+    "pk": 4,
+    "fields": {
+      "name": "Graphics",
+      "slug": "graphics"
+    }
+  },
+  {
+    "model": "store.category",
+    "pk": 5,
+    "fields": {
+      "name": "Music",
+      "slug": "music"
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 1,
+    "fields": {
+      "title": "Beginner's Guide to Python",
+      "slug": "beginners-guide-to-python",
+      "category": 1,
+      "description": "A concise, practical ebook for Python newbies.",
+      "price": "10.00",
+      "image": "",
+      "file": "",
+      "is_active": true
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 2,
+    "fields": {
+      "title": "Django Crash Course (Video)",
+      "slug": "django-crash-course-video",
+      "category": 2,
+      "description": "Short course covering views, models, templates.",
+      "price": "30.00",
+      "image": "",
+      "file": "",
+      "is_active": true
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 3,
+    "fields": {
+      "title": "Portfolio Website Template",
+      "slug": "portfolio-website-template",
+      "category": 3,
+      "description": "Responsive HTML/CSS template for portfolios.",
+      "price": "15.00",
+      "image": "",
+      "file": "",
+      "is_active": true
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 4,
+    "fields": {
+      "title": "Icon Pack 200+",
+      "slug": "icon-pack-200",
+      "category": 4,
+      "description": "Vector icons suitable for apps and websites.",
+      "price": "5.00",
+      "image": "",
+      "file": "",
+      "is_active": true
+    }
+  },
+  {
+    "model": "store.product",
+    "pk": 5,
+    "fields": {
+      "title": "Lo-Fi Music Pack",
+      "slug": "lofi-music-pack",
+      "category": 5,
+      "description": "Royalty-free lo-fi background tracks.",
+      "price": "20.00",
+      "image": "",
+      "file": "",
+      "is_active": true
+    }
+  }
+]

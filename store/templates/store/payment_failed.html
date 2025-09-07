@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Payment Failed{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center">
+    <h3 class="text-danger mb-3">Payment Failed ❌</h3>
+    <p>Something went wrong with your payment. Please try again.</p>
+
+    <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
+        <a href="{% url 'store:checkout' %}" class="btn btn-warning">Try Again</a>
+        <a href="{% url 'store:cart' %}" class="btn btn-secondary">Back to Cart</a>
+        <a href="{% url 'store:index' %}" class="btn btn-primary">Continue Shopping</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Payment Success{% endblock %}
+
+{% block content %}
+<div class="container py-5 text-center">
+  <h3 class="text-success mb-3">Payment Successful!</h3>
+  <p>Thank you! Your order <strong>#{{ order.id }}</strong> has been placed successfully.</p>
+
+  <div class="d-flex justify-content-center flex-wrap gap-2 mt-3">
+    <a class="btn btn-primary" href="{% url 'store:index' %}">Continue Shopping</a>
+    <a class="btn btn-secondary" href="{% url 'store:order_detail' order.id %}">View Order</a>
+    <a class="btn btn-outline-secondary" href="{% url 'store:orders' %}">My Orders</a>
+  </div>
+</div>
+{% endblock %}

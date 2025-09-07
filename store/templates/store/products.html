@@ -1,0 +1,68 @@
+  <!-- Intro Text -->
+  <div class="text-center mb-5">
+    <h2 class="fw-bold">Welcome to <span class="text-primary">Digital Store</span></h2>
+    <p class="text-muted fs-5">
+      Discover top-rated courses, eBooks, and digital resources to boost your skills in design, programming, and science.  
+      Learn at your own pace and take the next step toward success!
+    </p>
+  </div>
+  <!-- Products Section -->
+<section id="products">
+  <h2 class="text-center">Our Products</h2>
+  <!-- your product cards / loop -->
+</section>
+
+
+
+  <div class="row">
+    <!-- Sidebar Categories -->
+    <div class="col-lg-3 mb-4">
+      <h5 class="fw-bold mb-3">Categories</h5>
+      <ul class="list-group shadow-sm rounded-3 overflow-hidden">
+        <a class="list-group-item list-group-item-action {% if not active_category %}active{% endif %}" href="{% url 'store:index' %}">
+          <i class="bi bi-grid me-2"></i> All
+        </a>
+        {% for c in categories %}
+          <a class="list-group-item list-group-item-action {% if active_category and active_category.id == c.id %}active{% endif %}" href="{% url 'store:category' c.slug %}">
+            <i class="bi bi-folder2-open me-2"></i> {{ c.name }}
+          </a>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <!-- Products Section -->
+    <div class="col-lg-9" >
+      {% if query %}
+        <p class="mb-3 fs-6">Search results for <strong>"{{ query }}"</strong></p>
+      {% endif %}
+      <div class="row g-4">
+        {% for p in products %}
+        <div class="col-md-6 col-lg-4">
+          <div class="card h-100 border-0 shadow-lg rounded-4 product-card">
+            {% if p.image %}
+              <img src="{{ p.image.url }}" class="card-img-top rounded-top-4" alt="{{ p.title }}" style="height:200px; object-fit:cover;">
+            {% else %}
+              <img src="https://via.placeholder.com/300x200.png?text=No+Image" class="card-img-top rounded-top-4" alt="{{ p.title }}">
+            {% endif %}
+            <div class="card-body d-flex flex-column">
+              <h6 class="card-title fw-bold text-truncate">{{ p.title }}</h6>
+              <p class="card-text small text-muted text-truncate" style="max-height: 3.5em;">{{ p.description }}</p>
+              <div class="mt-auto d-flex justify-content-between align-items-center">
+                <span class="fw-bold text-success h6">{{ p.price|currency }}</span>
+                <div class="btn-group">
+                  <a href="{% url 'store:product_detail' p.slug %}" class="btn btn-outline-primary btn-sm px-3 rounded-pill">
+                    <i class="bi bi-eye"></i> View
+                  </a>
+                  <!-- Add to Cart button -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+          <p>No products found.</p>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>

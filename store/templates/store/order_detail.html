@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load cart_extras %}
+{% block title %}Order #{{ order.id }}{% endblock %}
+{% block content %}
+<h3>Order #{{ order.id }}</h3>
+<p>Date: {{ order.created_at|date:'Y-m-d H:i' }} | Status: {% if order.paid %}Paid{% else %}Unpaid{% endif %}</p>
+<table class="table">
+  <thead><tr><th>Product</th><th>Price</th><th>Qty</th><th>Total</th><th>Download</th></tr></thead>
+  <tbody>
+    {% for item in order.items.all %}
+    <tr>
+      <td>{{ item.product.title }}</td>
+      <td>{{ item.price|currency }}</td>
+      <td>{{ item.quantity }}</td>
+      <td>{{ item.line_total|currency }}</td>
+      <td>
+        {% if order.paid %}
+          <a class="btn btn-sm btn-success" href="{% url 'store:secure_download' item.product.id %}">Download</a>
+        {% else %}
+          <span class="text-muted">Pay to download</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
